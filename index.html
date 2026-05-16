@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Byton Downloader - Social Media Post Downloader</title>
+    <meta name="description" content="Download high-quality videos and audio from TikTok, YouTube, Facebook, Instagram, Twitter, and Spotify instantly. Fast, free, and simple.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Welcome Splash Screen -->
+    <div id="welcome-splash" class="splash-screen active">
+        <div class="splash-content">
+            <img src="https://files.catbox.moe/r1zpde.jpg" alt="Byton Downloader Logo" class="splash-logo">
+            <h1 class="splash-title">BYTON DOWNLOADER</h1>
+            <div class="rocket-container">
+                <div class="rocket">🚀</div>
+                <div class="fire-trail"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app" class="app-container" style="display: none;">
+        <!-- Mobile Header -->
+        <header class="mobile-header">
+            <button class="menu-toggle" id="menu-toggle">
+                <i data-lucide="menu"></i>
+            </button>
+            <div class="header-brand">
+                <img src="https://files.catbox.moe/r1zpde.jpg" alt="Logo" class="header-logo">
+                <span class="header-title">BYTON DOWNLOADER</span>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="https://files.catbox.moe/r1zpde.jpg" alt="Logo" class="sidebar-logo">
+                <h2 class="sidebar-title">BYTON DOWNLOADER</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#home" class="nav-item active" data-page="home">
+                    <i data-lucide="home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#tiktok" class="nav-item" data-page="tiktok">
+                    <i data-lucide="download"></i>
+                    <span>TikTok</span>
+                </a>
+                <a href="#youtube" class="nav-item" data-page="youtube">
+                    <i data-lucide="youtube"></i>
+                    <span>YouTube</span>
+                </a>
+                <a href="#facebook" class="nav-item" data-page="facebook">
+                    <i data-lucide="facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                <a href="#instagram" class="nav-item" data-page="instagram">
+                    <i data-lucide="instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="#twitter" class="nav-item" data-page="twitter">
+                    <i data-lucide="twitter"></i>
+                    <span>Twitter (X)</span>
+                </a>
+                <a href="#spotify" class="nav-item" data-page="spotify">
+                    <i data-lucide="music"></i>
+                    <span>Spotify</span>
+                </a>
+                <a href="#search" class="nav-item" data-page="search">
+                    <i data-lucide="search"></i>
+                    <span>Search</span>
+                </a>
+                <a href="#profile" class="nav-item" data-page="profile">
+                    <i data-lucide="user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="#settings" class="nav-item" data-page="settings">
+                    <i data-lucide="settings"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Page -->
+            <section id="home-page" class="page active">
+                <div class="page-header">
+                    <div class="brand-header">
+                        <img src="https://files.catbox.moe/r1zpde.jpg" alt="Logo" class="page-logo">
+                        <div>
+                            <h1 class="page-title italic">BYTON DOWNLOADER</h1>
+                            <p class="page-subtitle">Fast, Simple, and High Quality Downloaders</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spotlight Section -->
+                <div class="spotlight-section">
+                    <h2 class="section-title italic">
+                        <i data-lucide="sparkles"></i>
+                        Spotlight
+                    </h2>
+                    <p class="section-subtitle">Most used platforms</p>
+                    
+                    <div class="spotlight-grid">
+                        <div class="spotlight-card youtube">
+                            <div class="spotlight-icon">📺</div>
+                            <h3>YouTube Downloader</h3>
+                            <p>Extract HD videos and audio easily</p>
+                            <button class="btn-primary" onclick="navigateTo('youtube')">Open Now</button>
+                        </div>
+                        <div class="spotlight-card tiktok">
+                            <div class="spotlight-icon" style="background: #000; border-radius: 1rem; padding: 0.5rem; display: flex; align-items: center; justify-content: center;">
+                                <img src="https://miaoda-site-img.s3cdn.medo.dev/images/KLing_ce64e2ba-677d-4ccb-8bf3-5343fd427687.jpg" alt="TikTok" style="width: 100%; height: 100%; object-fit: contain;">
+                            </div>
+                            <h3>TikTok Downloader</h3>
+                            <p>Download videos without watermark</p>
+                            <button class="btn-primary" onclick="navigateTo('tiktok')">Try Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Bar -->
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <i data-lucide="users"></i>
+                        <span>Total Visitors: <strong id="visitor-count">1254</strong></span>
+                    </div>
+                </div>
+
+                <!-- Categories Section -->
+                <div class="categories-section">
+                    <h2 class="section-title italic">
+                        <i data-lucide="video"></i>
+                        Platforms
+                    </h2>
+                    
+                    <div class="category-grid">
+                        <div class="category-card">
+                            <div class="category-icon" style="background: #000000;">
+                                <img src="https://miaoda-site-img.s3cdn.medo.dev/images/KLing_ce64e2ba-677d-4ccb-8bf3-5343fd427687.jpg" alt="TikTok" style="width: 100%; height: 100%; object-fit: contain; padding: 10%;">
+                            </div>
+                            <div class="category-content">
+                                <h3>TikTok</h3>
+                                <p class="category-tag">No Watermark</p>
+                                <p class="category-desc">Download TikTok videos without watermark in high quality MP4 format instantly.</p>
+                            </div>
+                            <button class="btn-outline" onclick="navigateTo('tiktok')">
+                                Go to TikTok
+                                <i data-lucide="chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="category-card">
+                            <div class="category-icon">
+                                <img src="https://files.catbox.moe/2b355k.jpeg" alt="Instagram" style="width: 100%; height: 100%; object-fit: contain; border-radius: 1rem;">
+                            </div>
+                            <div class="category-content">
+                                <h3>Instagram</h3>
+                                <p class="category-tag">Reels & Posts</p>
+                                <p class="category-desc">Download Instagram reels, photos and videos in high resolution with one click.</p>
+                            </div>
+                            <button class="btn-outline" onclick="navigateTo('instagram')">
+                                Go to Instagram
+                                <i data-lucide="chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="category-card">
+                            <div class="category-icon" style="background: #1877f2;">
+                                <img src="https://files.catbox.moe/f0yf9o.png" alt="Facebook" style="width: 100%; height: 100%; object-fit: contain; padding: 10%;">
+                            </div>
+                            <div class="category-content">
+                                <h3>Facebook</h3>
+                                <p class="category-tag">Video & Stories</p>
+                                <p class="category-desc">Save Facebook videos and stories directly to your device in high quality.</p>
+                            </div>
+                            <button class="btn-outline" onclick="navigateTo('facebook')">
+                                Go to Facebook
+                                <i data-lucide="chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="category-card">
+                            <div class="category-icon" style="background: #000000;">
+                                <img src="https://files.catbox.moe/1y9nh0.jpeg" alt="Twitter" style="width: 100%; height: 100%; object-fit: contain; border-radius: 1rem;">
+                            </div>
+                            <div class="category-content">
+                                <h3>Twitter (X)</h3>
+                                <p class="category-tag">HD Video</p>
+                                <p class="category-desc">Save any video from Twitter (X) directly to your device. Support all formats.</p>
+                            </div>
+                            <button class="btn-outline" onclick="navigateTo('twitter')">
+                                Go to Twitter
+                                <i data-lucide="chevron-right"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="category-card">
+                            <div class="category-icon" style="background: #1DB954;">
+                                <img src="https://files.catbox.moe/nqm0de.png" alt="Spotify" style="width: 100%; height: 100%; object-fit: contain; padding: 10%;">
+                            </div>
+                            <div class="category-content">
+                                <h3>Spotify</h3>
+                                <p class="category-tag">MP3 320kbps</p>
+                                <p class="category-desc">Convert Spotify tracks and playlists to high quality MP3 audio files.</p>
+                            </div>
+                            <button class="btn-outline" onclick="navigateTo('spotify')">
+                                Go to Spotify
+                                <i data-lucide="chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Instagram Page -->
+            <section id="instagram-page" class="page">
+                <div class="page-header instagram-header">
+                    <div class="instagram-icon-container" style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 2rem; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+                        <img src="https://files.catbox.moe/2b355k.jpeg" alt="Instagram" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div style="margin-left: 2rem;">
+                        <h1 class="page-title italic">Instagram Downloader</h1>
+                        <p class="page-subtitle">Download Reels, Stories, and Posts</p>
+                    </div>
+                </div>
+                <div class="downloader-container" style="max-width: 600px; margin-top: 2rem;">
+                    <div class="input-group" style="display: flex; gap: 1rem;">
+                        <input type="text" placeholder="Paste Instagram link here..." class="downloader-input" style="flex: 1; padding: 1rem; border: 2px solid #ddd; border-radius: 1rem;">
+                        <button class="btn-primary" onclick="showNotification('Coming soon — this downloader will be available shortly!')" style="background: #06b6d4; color: white; padding: 0.8rem 1.5rem; border-radius: 1rem; border: none; font-weight: 700; cursor: pointer;">Fetch</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other pages placeholders -->
+            <!-- TikTok Page -->
+            <section id="tiktok-page" class="page">
+                <div class="page-header" style="background: #000000; display: flex; align-items: center; padding: 3rem; border-radius: 2.5rem; color: white;">
+                    <div style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 2rem; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+                        <img src="https://miaoda-site-img.s3cdn.medo.dev/images/KLing_ce64e2ba-677d-4ccb-8bf3-5343fd427687.jpg" alt="TikTok" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div style="margin-left: 2rem;">
+                        <h1 class="page-title italic" style="color: white;">TikTok Downloader</h1>
+                        <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Download Videos Without Watermark</p>
+                    </div>
+                </div>
+                <div class="downloader-container" style="max-width: 600px; margin-top: 2rem;">
+                    <div class="input-group" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <input id="tiktok-input" type="text" placeholder="Paste TikTok link here..." class="downloader-input" style="flex: 1; padding: 1rem; border: 2px solid #ddd; border-radius: 1rem;">
+                        <button class="btn-primary" onclick="fetchTikTok()" style="background: #000000; color: white; padding: 0.8rem 1.5rem; border-radius: 1rem; border: none; font-weight: 700; cursor: pointer;">Fetch</button>
+                    </div>
+                    <div id="tiktok-result" style="display:none; background: #f9f9f9; border-radius: 1rem; padding: 1.5rem; margin-top: 1rem;"></div>
+                </div>
+            </section>
+            <!-- YouTube Page -->
+            <section id="youtube-page" class="page">
+                <div class="page-header" style="background: #ff0000; display: flex; align-items: center; padding: 3rem; border-radius: 2.5rem; color: white;">
+                    <div style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 2rem; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+                        <img src="https://files.catbox.moe/j6mzbk.png" alt="YouTube" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div style="margin-left: 2rem;">
+                        <h1 class="page-title italic" style="color: white;">YouTube Downloader</h1>
+                        <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Download HD Videos and Audio</p>
+                    </div>
+                </div>
+                <div class="downloader-container" style="max-width: 600px; margin-top: 2rem;">
+                    <div class="input-group" style="display: flex; gap: 1rem;">
+                        <input type="text" placeholder="Paste YouTube link here..." class="downloader-input" style="flex: 1; padding: 1rem; border: 2px solid #ddd; border-radius: 1rem;">
+                        <button class="btn-primary" onclick="showNotification('Coming soon — this downloader will be available shortly!')" style="background: #ff0000; color: white; padding: 0.8rem 1.5rem; border-radius: 1rem; border: none; font-weight: 700; cursor: pointer;">Fetch</button>
+                    </div>
+                </div>
+            </section>
+            <!-- Facebook Page -->
+            <section id="facebook-page" class="page">
+                <div class="page-header" style="background: #1877f2; display: flex; align-items: center; padding: 3rem; border-radius: 2.5rem; color: white;">
+                    <div style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 2rem; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+                        <img src="https://files.catbox.moe/f0yf9o.png" alt="Facebook" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div style="margin-left: 2rem;">
+                        <h1 class="page-title italic" style="color: white;">Facebook Downloader</h1>
+                        <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Download Facebook Videos and Stories</p>
+                    </div>
+                </div>
+                <div class="downloader-container" style="max-width: 600px; margin-top: 2rem;">
+                    <div class="input-group" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <input id="fb-input" type="text" placeholder="Paste Facebook link here..." class="downloader-input" style="flex: 1; padding: 1rem; border: 2px solid #ddd; border-radius: 1rem;">
+                        <button class="btn-primary" onclick="fetchFacebook()" style="background: #1877f2; color: white; padding: 0.8rem 1.5rem; border-radius: 1rem; border: none; font-weight: 700; cursor: pointer;">Fetch</button>
+                    </div>
+                    <div id="fb-result" style="display:none; background: #f9f9f9; border-radius: 1rem; padding: 1.5rem; margin-top: 1rem;"></div>
+                </div>
+            </section>
+            <!-- Twitter Page -->
+            <section id="twitter-page" class="page">
+                <div class="page-header" style="background: #000000; display: flex; align-items: center; padding: 3rem; border-radius: 2.5rem; color: white;">
+                    <div style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 2rem; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+                        <img src="https://files.catbox.moe/1y9nh0.jpeg" alt="Twitter" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div style="margin-left: 2rem;">
+                        <h1 class="page-title italic" style="color: white;">Twitter Downloader</h1>
+                        <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Download HD Videos and GIFs</p>
+                    </div>
+                </div>
+                <div class="downloader-container" style="max-width: 600px; margin-top: 2rem;">
+                    <div class="input-group" style="display: flex; gap: 1rem;">
+                        <input type="text" placeholder="Paste Twitter (X) link here..." class="downloader-input" style="flex: 1; padding: 1rem; border: 2px solid #ddd; border-radius: 1rem;">
+                        <button class="btn-primary" onclick="showNotification('Coming soon — this downloader will be available shortly!')" style="background: #000000; color: white; padding: 0.8rem 1.5rem; border-radius: 1rem; border: none; font-weight: 700; cursor: pointer;">Fetch</button>
+                    </div>
+                </div>
+            </section>
+            <!-- Spotify Page -->
+            <section id="spotify-page" class="page">
+                <div class="page-header" style="background: #1DB954; display: flex; align-items: center; padding: 3rem; border-radius: 2.5rem; color: white;">
+                    <div style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 2rem; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+                        <img src="https://files.catbox.moe/nqm0de.png" alt="Spotify" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div style="margin-left: 2rem;">
+                        <h1 class="page-title italic" style="color: white;">Spotify Downloader</h1>
+                        <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Convert Tracks and Playlists to MP3</p>
+                    </div>
+                </div>
+                <div class="downloader-container" style="max-width: 600px; margin-top: 2rem;">
+                    <div class="input-group" style="display: flex; gap: 1rem;">
+                        <input type="text" placeholder="Paste Spotify link here..." class="downloader-input" style="flex: 1; padding: 1rem; border: 2px solid #ddd; border-radius: 1rem;">
+                        <button class="btn-primary" onclick="showNotification('Coming soon — this downloader will be available shortly!')" style="background: #1DB954; color: white; padding: 0.8rem 1.5rem; border-radius: 1rem; border: none; font-weight: 700; cursor: pointer;">Fetch</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Page -->
+            <section id="search-page" class="page">
+                <div class="page-header">
+                    <h1 class="page-title">Search</h1>
+                    <p class="page-subtitle">Find platforms</p>
+                </div>
+            </section>
+
+            <!-- Settings Page -->
+            <section id="settings-page" class="page">
+                <div class="page-header">
+                    <h1 class="page-title">Settings</h1>
+                    <p class="page-subtitle">Manage your experience</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <div class="bottom-nav-inner">
+                <a href="#home" class="bottom-nav-item active" data-page="home">
+                    <i data-lucide="home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#tiktok" class="bottom-nav-item" data-page="tiktok">
+                    <i data-lucide="download"></i>
+                    <span>TikTok</span>
+                </a>
+                <a href="#youtube" class="bottom-nav-item" data-page="youtube">
+                    <i data-lucide="youtube"></i>
+                    <span>YouTube</span>
+                </a>
+                <a href="#facebook" class="bottom-nav-item" data-page="facebook">
+                    <i data-lucide="facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                <a href="#instagram" class="bottom-nav-item" data-page="instagram">
+                    <i data-lucide="instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="#twitter" class="bottom-nav-item" data-page="twitter">
+                    <i data-lucide="twitter"></i>
+                    <span>Twitter</span>
+                </a>
+                <a href="#spotify" class="bottom-nav-item" data-page="spotify">
+                    <i data-lucide="music"></i>
+                    <span>Spotify</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
