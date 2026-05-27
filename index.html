@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JW - Bible Verses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes colorChangeGlow {
+            0% { color: #ff3366; text-shadow: 0 0 10px #ff3366, 0 0 20px #ff3366, 0 0 30px #ff3366; }
+            25% { color: #33ccff; text-shadow: 0 0 10px #33ccff, 0 0 20px #33ccff, 0 0 30px #33ccff; }
+            50% { color: #66ff66; text-shadow: 0 0 10px #66ff66, 0 0 20px #66ff66, 0 0 30px #66ff66; }
+            75% { color: #cc33ff; text-shadow: 0 0 10px #cc33ff, 0 0 20px #cc33ff, 0 0 30px #cc33ff; }
+            100% { color: #ff3366; text-shadow: 0 0 10px #ff3366, 0 0 20px #ff3366, 0 0 30px #ff3366; }
+        }
+        
+        .glowing-jw {
+            font-size: 5rem;
+            font-weight: 900;
+            font-family: 'Georgia', serif;
+            letter-spacing: 0.1em;
+            animation: colorChangeGlow 6s infinite;
+            text-align: center;
+            margin: 1.5rem 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .modal-bg {
+            background-color: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Custom Scrollbar for nice reading */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; 
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- Header -->
+    <header class="w-full flex justify-center items-center py-6">
+        <h1 class="glowing-jw">JW</h1>
+    </header>
+
+    <!-- Main Content: Saved Verses -->
+    <main class="flex-grow w-full max-w-4xl mx-auto px-4 pb-24">
+        <div id="empty-state" class="text-center text-slate-400 mt-12 hidden">
+            <p class="text-xl">No verses saved yet.</p>
+            <p class="text-sm mt-2">Tap the + button to add your first Bible verse.</p>
+        </div>
+        
+        <div id="verse-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <!-- Verse cards will be injected here by JS -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-4 text-center text-slate-500 text-xs sm:text-sm mt-auto bg-slate-900 border-t border-slate-800">
+        ⚠️ Copyright: Not a jw.org application. Don't wrong use. 2026 | Byton Technologies
+    </footer>
+
+    <!-- Floating Action Button (+) -->
+    <button onclick="openAddModal()" class="fixed bottom-12 right-6 md:right-12 bg-blue-600 hover:bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-4xl shadow-[0_0_15px_rgba(37,99,235,0.6)] transition-transform transform hover:scale-110 z-10 cursor-pointer pb-2">
+        +
+    </button>
+
+    <!-- Add Verse Modal -->
+    <div id="add-modal" class="fixed inset-0 modal-bg z-50 hidden flex justify-center items-center p-4">
+        <div class="bg-slate-800 rounded-xl shadow-2xl w-full max-w-lg overflow-hidden border border-slate-700">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-6 text-white border-b border-slate-700 pb-2">Add New Verse</h2>
+                
+                <form id="add-form" onsubmit="saveVerse(event)">
+                    <div class="mb-4">
+                        <label class="block text-slate-300 text-sm font-bold mb-2" for="bookName">Bible Verse Name (Book)</label>
+                        <input id="bookName" type="text" placeholder="e.g., John" required
+                            class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-3 px-4 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-slate-300 text-sm font-bold mb-2" for="chapterName">Chapter & Verse</label>
+                        <input id="chapterName" type="text" placeholder="e.g., 3:16" required
+                            class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-3 px-4 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-slate-300 text-sm font-bold mb-2" for="verseText">Verse Content</label>
+                        <textarea id="verseText" rows="6" placeholder="Paste the verse here to read later..." required
+                            class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-3 px-4 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-none"></textarea>
+                    </div>
+
+                    <div class="flex justify-end gap-3">
+                        <button type="button" onclick="closeAddModal()" class="px-5 py-2.5 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors">Cancel</button>
+                        <button type="submit" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium shadow-lg transition-colors">Save Verse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Read Verse Modal -->
+    <div id="read-modal" class="fixed inset-0 modal-bg z-50 hidden flex justify-center items-center p-4">
+        <div class="bg-slate-800 rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col border border-slate-700 relative">
+            <div class="p-6 border-b border-slate-700 flex justify-between items-center bg-slate-800 rounded-t-xl">
+                <h2 id="read-title" class="text-2xl md:text-3xl font-bold text-white tracking-wide"></h2>
+                <button onclick="closeReadModal()" class="text-slate-400 hover:text-white text-3xl leading-none">&times;</button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto flex-grow bg-slate-900/50 text-slate-200 text-lg md:text-xl leading-relaxed">
+                <p id="read-content" class="whitespace-pre-wrap"></p>
+            </div>
+            
+            <div class="p-4 border-t border-slate-700 bg-slate-800 rounded-b-xl flex justify-between items-center">
+                <button id="delete-btn" class="text-red-400 hover:text-red-300 text-sm font-medium px-3 py-2 rounded hover:bg-red-900/30 transition-colors">
+                    Delete Verse
+                </button>
+                <button onclick="closeReadModal()" class="px-6 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-medium transition-colors">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data management
+        const STORAGE_KEY = 'jw_saved_verses';
+        let verses = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        let currentViewingId = null;
+
+        // DOM Elements
+        const verseListEl = document.getElementById('verse-list');
+        const emptyStateEl = document.getElementById('empty-state');
+        const addModal = document.getElementById('add-modal');
+        const readModal = document.getElementById('read-modal');
+        const addForm = document.getElementById('add-form');
+
+        // Initialization
+        function init() {
+            renderVerses();
+        }
+
+        // Render the list of verses on the home page
+        function renderVerses() {
+            verseListEl.innerHTML = '';
+            
+            if (verses.length === 0) {
+                emptyStateEl.classList.remove('hidden');
+            } else {
+                emptyStateEl.classList.add('hidden');
+                
+                // Render newest first
+                const reversedVerses = [...verses].reverse();
+                
+                reversedVerses.forEach(verse => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-slate-800 border border-slate-700 rounded-xl p-5 cursor-pointer hover:bg-slate-750 hover:border-blue-500/50 transition-all shadow-lg hover:shadow-blue-900/20 group';
+                    card.onclick = () => openReadModal(verse.id);
+                    
+                    // Snippet creation (truncate long text)
+                    const snippet = verse.text.length > 80 ? verse.text.substring(0, 80) + '...' : verse.text;
+                    
+                    card.innerHTML = `
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">${escapeHTML(verse.book)} ${escapeHTML(verse.chapter)}</h3>
+                            <span class="text-xs text-slate-500">${new Date(verse.date).toLocaleDateString()}</span>
+                        </div>
+                        <p class="text-slate-400 text-sm leading-relaxed">${escapeHTML(snippet)}</p>
+                    `;
+                    
+                    verseListEl.appendChild(card);
+                });
+            }
+        }
+
+        // Save new verse
+        function saveVerse(event) {
+            event.preventDefault();
+            
+            const book = document.getElementById('bookName').value.trim();
+            const chapter = document.getElementById('chapterName').value.trim();
+            const text = document.getElementById('verseText').value.trim();
+            
+            if (!book || !chapter || !text) return;
+            
+            const newVerse = {
+                id: Date.now().toString(),
+                book,
+                chapter,
+                text,
+                date: new Date().toISOString()
+            };
+            
+            verses.push(newVerse);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(verses));
+            
+            addForm.reset();
+            closeAddModal();
+            renderVerses();
+        }
+
+        // Delete verse
+        function deleteVerse(id) {
+            if(confirm('Are you sure you want to remove this verse?')) {
+                verses = verses.filter(v => v.id !== id);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(verses));
+                closeReadModal();
+                renderVerses();
+            }
+        }
+
+        // Modals management
+        function openAddModal() {
+            addModal.classList.remove('hidden');
+            setTimeout(() => document.getElementById('bookName').focus(), 100);
+        }
+
+        function closeAddModal() {
+            addModal.classList.add('hidden');
+            addForm.reset();
+        }
+
+        function openReadModal(id) {
+            const verse = verses.find(v => v.id === id);
+            if (!verse) return;
+            
+            currentViewingId = id;
+            document.getElementById('read-title').textContent = `${verse.book} ${verse.chapter}`;
+            document.getElementById('read-content').textContent = verse.text;
+            
+            const delBtn = document.getElementById('delete-btn');
+            delBtn.onclick = () => deleteVerse(id);
+            
+            readModal.classList.remove('hidden');
+        }
+
+        function closeReadModal() {
+            readModal.classList.add('hidden');
+            currentViewingId = null;
+        }
+
+        // Utilities
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag])
+            );
+        }
+
+        // Close modals on clicking outside
+        window.onclick = function(event) {
+            if (event.target === addModal) {
+                closeAddModal();
+            }
+            if (event.target === readModal) {
+                closeReadModal();
+            }
+        }
+
+        // Close modals on Escape key
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeAddModal();
+                closeReadModal();
+            }
+        });
+
+        // Run initialization
+        init();
+    </script>
+</body>
+</html>
